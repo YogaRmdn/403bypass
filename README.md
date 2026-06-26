@@ -1,6 +1,8 @@
-# 403 Bypass Sakti
+# 403 Bypass Tool
 
-Tool untuk bypass 403 Forbidden dengan berbagai teknik.
+Tool untuk bypass halaman HTTP 403 (Forbidden) / 401 (Unauthorized) dengan berbagai teknik.
+
+**Develop By Bangyog**
 
 ## Installation
 
@@ -13,69 +15,52 @@ pip install requests
 ## Usage
 
 ```bash
-python3 403bypass.py -u <target_url>
+python3 403by.py -u <URL> <mode>
 ```
 
-### Options
-
-| Flag | Description |
-|------|-------------|
-| `-u`, `--url` | Target URL (e.g., `https://example.com/admin`) |
-| `-p`, `--proxy` | Proxy (e.g., `http://127.0.0.1:8080`) |
-| `-t`, `--threads` | Thread count (default: 30) |
-| `--timeout` | Request timeout in seconds (default: 5) |
-| `--cookie` | Cookie string |
-| `--headers` | Additional headers (`key:value,key2:value2`) |
-| `--all` | Run all bypass techniques |
-| `--headers-only` | Only test header bypass |
-| `--path-only` | Only test path bypass |
-| `--method-only` | Only test HTTP method bypass |
-| `--payload-only` | Only test payload bypass |
-
-### Examples
+### Example
 
 ```bash
-# Basic
-python3 403bypass.py -u https://target.com/admin
-
-# With proxy
-python3 403bypass.py -u https://target.com/admin -p http://127.0.0.1:8080
-
-# With cookie
-python3 403bypass.py -u https://target.com/admin --cookie "session=abc123"
-
-# Run all techniques
-python3 403bypass.py -u https://target.com/admin --all
-
-# Specific module only
-python3 403bypass.py -u https://target.com/admin --headers-only
-python3 403bypass.py -u https://target.com/admin --path-only
+python3 403by.py -u http://target.com/admin --exploit
 ```
 
-## Techniques
+## Modes
 
-### Header Bypass (30+)
-- `X-Forwarded-For`, `X-Real-IP`, `X-Client-IP` - IP spoofing
-- `X-Original-URL`, `X-Rewrite-URL` - URL override
-- `X-Custom-IP-Authorization` - Custom auth bypass
-- `X-HTTP-Method-Override` - Method override
-- Various forward headers
+| Mode | Description |
+|------|-------------|
+| `--header` | HTTP Header Bypass (51+ header payloads) |
+| `--protocol` | Protocol Based Bypass (HTTP/HTTPS scheme) |
+| `--port` | Port Based Bypass (X-Forwarded-Port) |
+| `--HTTPmethod` | HTTP Method Bypass (11 methods) |
+| `--encode` | URL Encode Bypass (path traversal) |
+| `--SQLi` | ModSecurity & libinjection Bypass |
+| `--exploit` | Run all bypass modes (full scan) |
 
-### Path Bypass (30+)
-- `..;/` - Path traversal
-- `%2e`, `%2e%2e/` - URL encoding
-- `//`, `/./` - Path normalization
-- `*`, `?.js`, `.json` - Extension bypass
-- Null byte, tab, newline injection
+## Features
 
-### Method Bypass (9)
-- GET, POST, PUT, DELETE, OPTIONS, PATCH, HEAD, CONNECT, TRACE
+- **Header Injection** — X-Forwarded-For, X-Originating-IP, X-Custom-IP-Authorization, X-Original-URL, X-Rewrite-URL, and 45+ more headers
+- **Protocol Switch** — HTTP ↔ HTTPS, X-Forwarded-Scheme
+- **Port Manipulation** — X-Forwarded-Port (80, 443, 8080, 8443, 4443)
+- **HTTP Method Fuzzing** — GET, POST, PUT, HEAD, OPTIONS, TRACE, PATCH, TRACK, CONNECT, UPDATE, LOCK
+- **URL Encoding** — 245+ path traversal and encoding bypass payloads
+- **SQLi Bypass** — ModSecurity & libinjection filter evasion
+- **Color Output** — Status code dengan warna
 
-### Payload Bypass (15+)
-- Query string injections
-- Fragment tricks
-- Combined path manipulations
+## Output
 
-## Disclaimer
+```
+[+] X-Rewrite-URL Payload: Status: 200, Length : 13292 👌
+  curl -ks -H 'X-Rewrite-URL: /admin' -X GET 'http://target.com/admin'
+[x] X-Forwarded-For Payload: Status: 403, Length : 31
+```
 
-For educational purposes and authorized testing only.
+| Prefix | Status | Description |
+|--------|--------|-------------|
+| `[+]` (green) | 2xx | Success |
+| `[x]` (red) | 4xx | Denied |
+| `[x]` (yellow) | 3xx | Redirect |
+| `[x]` (cyan) | 5xx | Error |
+
+## License
+
+MIT
