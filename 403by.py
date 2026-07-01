@@ -5,12 +5,12 @@ import sys
 import requests
 from urllib.parse import urlparse
 
-GREEN = '\033[32m'
-RED = '\033[31m'
-YELLOW = '\033[33m'
-BLUE = '\033[34m'
-CYAN = '\033[96m'
-END = '\033[0m'
+GREEN = ''
+RED = ''
+YELLOW = ''
+BLUE = ''
+CYAN = ''
+END = ''
 
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36"
 
@@ -234,10 +234,6 @@ def main():
     args = parser.parse_args()
 
     if args.help or not args.url:
-        print(f"\n{CYAN}╔═══════════════════════════════════╗{END}")
-        print(f"{CYAN}║    {GREEN}403 Bypass Tool - Usage{CYAN}     ║{END}")
-        print(f"{CYAN}╚═══════════════════════════════════╝{END}")
-        print()
         print(f"  {YELLOW}USAGE{END}")
         print(f"    python3 403by.py {GREEN}-u{END} {CYAN}<URL>{END} {YELLOW}<mode>{END}")
         print()
@@ -258,11 +254,11 @@ def main():
         print(f"  {YELLOW}ALL BYPASSES{END}")
         print(f"    {GREEN}--exploit{END}       Complete 403/401 Bypass Scan")
         print()
-        print(f"  {YELLOW}STATUS COLORS{END}")
-        print(f"    {GREEN}[+] 2xx{END}  Success")
-        print(f"    {YELLOW}[ ] 3xx{END}  Redirect")
-        print(f"    {RED}[x] 4xx{END}  Denied")
-        print(f"    {CYAN}[!] 5xx{END}  Error")
+        print(f"  STATUS CODE")
+        print("    [+] 2xx  Success")
+        print("    [?] 3xx  Redirect")
+        print("    [x] 4xx  Denied")
+        print("    [!] 5xx  Error")
         print()
         sys.exit(0 if args.help else 1)
 
@@ -298,4 +294,18 @@ def main():
         sys.exit(1)
 
 if __name__ == '__main__':
+    print(r"""
+**********************************************************
+*   _  _    ___ _____     ___                            *
+*  | || |  / _ \___ /    / __\_   _ _ __   __ _ ___ ___  *
+*  | || |_| | | ||_ \   /__\// | | | '_ \ / _` / __/ __| *
+*  |__   _| |_| |__) | / \/  \ |_| | |_) | (_| \__ \__ \ *
+*     |_|  \___/____/  \_____/\__, | .__/ \__,_|___/___/ *
+*                             |___/|_|                   *
+* 403 Bypass v1.0                                        *
+* Coded by Bangyog                                       *
+* 403 Bypass URL website                                 *
+* https://github.com/403bypass.git                       *
+**********************************************************
+""")
     main()

@@ -44,7 +44,7 @@ python3 403by.py -u http://target.com/admin --exploit
 - **HTTP Method Fuzzing** — GET, POST, PUT, HEAD, OPTIONS, TRACE, PATCH, TRACK, CONNECT, UPDATE, LOCK
 - **URL Encoding** — 245+ path traversal and encoding bypass payloads
 - **SQLi Bypass** — ModSecurity & libinjection filter evasion
-- **Color Output** — Status code dengan warna
+- **Plain Output** — Status code tanpa warna
 
 ## Output
 
@@ -56,10 +56,10 @@ python3 403by.py -u http://target.com/admin --exploit
 
 | Prefix | Status | Description |
 |--------|--------|-------------|
-| `[+]` (green) | 2xx | Success |
-| `[x]` (red) | 4xx | Denied |
-| `[x]` (yellow) | 3xx | Redirect |
-| `[x]` (cyan) | 5xx | Error |
+| `[+]` | 2xx | Success |
+| `[x]` | 4xx | Denied |
+| `[x]` | 3xx | Redirect |
+| `[x]` | 5xx | Error |
 
 ## License
 
